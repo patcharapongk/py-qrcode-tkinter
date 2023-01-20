@@ -14,7 +14,7 @@ path=os.getenv("path")
 
 def getPath():
     global path    
-    path = filedialog.askopenfilename(
+    path = filedialog.askopenfilenames(
         initialdir = os.getenv("initpath"),
         title = "Select file",
         filetypes= (("all files", "*.*"), ("jpg", "*.jpg"), ("png", "*.png")))
@@ -22,13 +22,14 @@ def getPath():
     decode()
 
 def decode():
-    updateLabel(path)
-    data =  pyzbar.pyzbar.decode(Image.open(path))
-    # https://note.nkmk.me/en/python-pyzbar-barcode-qrcode/
-    # 11.23 26Dec : Added multiple QR support
-    for item in data:
-        print(type(item))
-        text.insert(tk.END, item.data.decode("utf-8") + "\n")
+    for p in path:
+        updateLabel(p)
+        data =  pyzbar.pyzbar.decode(Image.open(p))
+        # https://note.nkmk.me/en/python-pyzbar-barcode-qrcode/
+        # 11.23 26Dec : Added multiple QR support
+        for item in data:
+            print(type(item))
+            text.insert(tk.END, item.data.decode("utf-8") + "\n")
 
 def clearText():
     text.delete('1.0', tk.END)

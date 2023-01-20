@@ -30,3 +30,4 @@ QR Code tools using Python + Tkinter GUI
 - v0.6 added currrent image path on label and window title
 
 - v1.0 added support for multiple QR in one image
+- v1.1 added support for multiple images 
